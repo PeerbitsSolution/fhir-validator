@@ -1,0 +1,7 @@
+{
+  "resourceType": "Patient",
+  "id": "synthetic-invalid-patient-001",
+  "active": "not-a-boolean",
+  "gender": "not-a-valid-gender",
+  "birthDate": "invalid-date-format"
+}

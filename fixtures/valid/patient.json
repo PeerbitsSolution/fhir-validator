@@ -1,0 +1,24 @@
+{
+  "resourceType": "Patient",
+  "id": "synthetic-patient-001",
+  "active": true,
+  "name": [
+    {
+      "use": "official",
+      "family": "Smith",
+      "given": ["John", "Jacob"]
+    }
+  ],
+  "gender": "male",
+  "birthDate": "1974-12-25",
+  "identifier": [
+    {
+      "system": "http://example.org/patients",
+      "value": "PAT-987654"
+    }
+  ],
+  "managingOrganization": {
+    "reference": "Organization/synthetic-org-001",
+    "display": "Acme Healthcare System"
+  }
+}

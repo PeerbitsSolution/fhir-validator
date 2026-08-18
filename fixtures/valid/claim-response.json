@@ -1,0 +1,42 @@
+{
+  "resourceType": "ClaimResponse",
+  "id": "synthetic-claimresponse-001",
+  "status": "active",
+  "type": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+        "code": "professional",
+        "display": "Professional"
+      }
+    ]
+  },
+  "use": "preauthorization",
+  "patient": {
+    "reference": "Patient/synthetic-patient-001",
+    "display": "John Smith"
+  },
+  "created": "2026-08-14T10:05:00Z",
+  "insurer": {
+    "reference": "Organization/synthetic-payer-001",
+    "display": "Apex Health Insurance"
+  },
+  "requestor": {
+    "reference": "Practitioner/synthetic-doc-001",
+    "display": "Dr. Sarah Jenkins"
+  },
+  "request": {
+    "reference": "Claim/synthetic-claim-001"
+  },
+  "outcome": "complete",
+  "disposition": "Prior authorization approved for requested service.",
+  "insurance": [
+    {
+      "sequence": 1,
+      "focal": true,
+      "coverage": {
+        "reference": "Coverage/synthetic-cov-001"
+      }
+    }
+  ]
+}

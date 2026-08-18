@@ -1,0 +1,7 @@
+# Global code owners
+*                       @PeerbitsSolution/healthtech-oss
+
+# Security & Conformance critical paths
+/src/                   @PeerbitsSolution/healthtech-oss
+/fixtures/              @PeerbitsSolution/healthtech-oss
+SECURITY.md             @PeerbitsSolution/healthtech-oss
