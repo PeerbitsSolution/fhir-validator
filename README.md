@@ -49,7 +49,9 @@ npm install @peerbits/fhir-validator
 
 ---
 
-## Quick Start
+## Demo and Quick Start
+
+[Peerbits HealthTech - Fhir Validator Demo](https://healthcare.peerbits.com/demo/fhir-validator)
 
 ### 1. Validating a Resource
 
