@@ -1,6 +1,6 @@
-import { ValidationIssue } from "../types";
-import { validateCodeableConcept } from "../coding";
-import { validateReference } from "../reference-rules";
+import { ValidationIssue } from "../types.js";
+import { validateCodeableConcept } from "../coding.js";
+import { validateReference } from "../reference-rules.js";
 
 const VALID_GENDERS = ["male", "female", "other", "unknown"];
 const DATE_REGEX = /^\d{4}(-\d{2}(-\d{2})?)?$/;

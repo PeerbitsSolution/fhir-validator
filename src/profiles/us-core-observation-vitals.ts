@@ -1,4 +1,4 @@
-import { ProfileConstraints } from "../types";
+import { ProfileConstraints } from "../types.js";
 
 /**
  * ILLUSTRATIVE ONLY — not a certified reproduction of the real US Core

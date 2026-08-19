@@ -1,4 +1,4 @@
-import { ValidationIssue } from "./types";
+import { ValidationIssue } from "./types.js";
 
 /**
  * Maps field paths to their allowed target FHIR resource types per FHIR R4 base spec.

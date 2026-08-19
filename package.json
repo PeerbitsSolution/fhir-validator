@@ -1,6 +1,6 @@
 {
   "name": "@peerbits/fhir-validator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Structural, cardinality, and reference validation for FHIR R4 resources — a fast base-spec validator with a pluggable illustrative-profile mechanism (not a full conformance engine)",
   "license": "Apache-2.0",
   "publishConfig": {
@@ -23,7 +23,8 @@
     "build": "tsc -p tsconfig.json",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",

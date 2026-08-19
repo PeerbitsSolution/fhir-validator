@@ -1,6 +1,6 @@
-import { ValidationIssue } from "../types";
-import { validateCodeableConcept } from "../coding";
-import { validateReference } from "../reference-rules";
+import { ValidationIssue } from "../types.js";
+import { validateCodeableConcept } from "../coding.js";
+import { validateReference } from "../reference-rules.js";
 
 const VALID_COVERAGE_STATUSES = ["active", "cancelled", "draft", "entered-in-error"];
 

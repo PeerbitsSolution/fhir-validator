@@ -1,6 +1,6 @@
-import { ValidationIssue } from "../types";
-import { validateCodeableConcept, validateCoding } from "../coding";
-import { validateReference } from "../reference-rules";
+import { ValidationIssue } from "../types.js";
+import { validateCodeableConcept, validateCoding } from "../coding.js";
+import { validateReference } from "../reference-rules.js";
 
 const VALID_ENCOUNTER_STATUSES = [
   "planned",

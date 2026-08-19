@@ -1,4 +1,4 @@
-import { ValidationIssue } from "./types";
+import { ValidationIssue } from "./types.js";
 
 /**
  * Validates the structural shape of a FHIR Coding element.

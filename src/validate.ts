@@ -3,14 +3,14 @@ import {
   ValidateOptions,
   ValidationIssue,
   ValidationResult,
-} from "./types";
-import { validatePatient } from "./base-definitions/patient";
-import { validateObservation } from "./base-definitions/observation";
-import { validateEncounter } from "./base-definitions/encounter";
-import { validateCondition } from "./base-definitions/condition";
-import { validateCoverage } from "./base-definitions/coverage";
-import { validateClaim } from "./base-definitions/claim";
-import { validateClaimResponse } from "./base-definitions/claim-response";
+} from "./types.js";
+import { validatePatient } from "./base-definitions/patient.js";
+import { validateObservation } from "./base-definitions/observation.js";
+import { validateEncounter } from "./base-definitions/encounter.js";
+import { validateCondition } from "./base-definitions/condition.js";
+import { validateCoverage } from "./base-definitions/coverage.js";
+import { validateClaim } from "./base-definitions/claim.js";
+import { validateClaimResponse } from "./base-definitions/claim-response.js";
 
 type ResourceValidator = (resource: Record<string, unknown>, path?: string) => ValidationIssue[];
 
