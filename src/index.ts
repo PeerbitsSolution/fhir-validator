@@ -4,7 +4,7 @@
  * docs/KNOWN_LIMITATIONS.md and developer handover spec.
  */
 
-export const VERSION = "1.0.1";
+export const VERSION = "1.1.0";
 
 // Main API
 export { validate, getNestedValue, validateProfileConstraints, hasCircularReference } from "./validate.js";

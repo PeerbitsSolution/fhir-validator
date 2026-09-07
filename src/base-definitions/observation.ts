@@ -19,6 +19,11 @@ const VALID_OBSERVATION_STATUSES = [
 export function validateObservation(resource: Record<string, unknown>, path = "Observation"): ValidationIssue[] {
   const issues: ValidationIssue[] = [];
 
+  const effectiveFields = ["effectiveDateTime", "effectivePeriod", "effectiveTiming", "effectiveInstant"].filter((field) => resource[field] !== undefined);
+  if (effectiveFields.length > 1) issues.push({ severity: "error", path: `${path}.effective[x]`, code: "cardinality", message: "Observation may contain only one effective[x] value." });
+  const valueFields = ["valueQuantity", "valueCodeableConcept", "valueString", "valueBoolean", "valueInteger", "valueRange", "valueRatio", "valueSampledData", "valueTime", "valueDateTime", "valuePeriod"].filter((field) => resource[field] !== undefined);
+  if (valueFields.length > 1) issues.push({ severity: "error", path: `${path}.value[x]`, code: "cardinality", message: "Observation may contain only one value[x] value." });
+
   if (resource.resourceType !== "Observation") {
     issues.push({
       severity: "error",
@@ -110,7 +115,7 @@ export function validateObservation(resource: Record<string, unknown>, path = "O
       });
     } else {
       const q = resource.valueQuantity as Record<string, unknown>;
-      if (q.value !== undefined && typeof q.value !== "number") {
+      if (q.value !== undefined && (typeof q.value !== "number" || !Number.isFinite(q.value))) {
         issues.push({
           severity: "error",
           path: `${path}.valueQuantity.value`,
@@ -142,6 +147,23 @@ export function validateObservation(resource: Record<string, unknown>, path = "O
           message: `Expected '${path}.valueQuantity.code' to be a string.`,
         });
       }
+      if (q.system !== undefined && q.system === "http://unitsofmeasure.org" && (typeof q.code !== "string" || !q.code.trim())) {
+        issues.push({ severity: "error", path: `${path}.valueQuantity.code`, code: "required", message: "UCUM Quantity requires a non-empty code." });
+      }
+    }
+  }
+
+  if (resource.effectiveDateTime !== undefined && (typeof resource.effectiveDateTime !== "string" || Number.isNaN(Date.parse(resource.effectiveDateTime)))) {
+    issues.push({ severity: "error", path: `${path}.effectiveDateTime`, code: "invalid-value", message: "effectiveDateTime must be a valid date-time string." });
+  }
+  if (resource.effectivePeriod !== undefined) {
+    if (!resource.effectivePeriod || typeof resource.effectivePeriod !== "object" || Array.isArray(resource.effectivePeriod)) {
+      issues.push({ severity: "error", path: `${path}.effectivePeriod`, code: "invalid-structure", message: "effectivePeriod must be an object." });
+    } else {
+      const period = resource.effectivePeriod as Record<string, unknown>;
+      const start = typeof period.start === "string" ? Date.parse(period.start) : NaN;
+      const end = typeof period.end === "string" ? Date.parse(period.end) : NaN;
+      if (Number.isNaN(start) || Number.isNaN(end) || start > end) issues.push({ severity: "error", path: `${path}.effectivePeriod`, code: "invalid-value", message: "effectivePeriod requires valid start and end values in chronological order." });
     }
   }
 
@@ -184,7 +206,9 @@ export function validateObservation(resource: Record<string, unknown>, path = "O
 
           if (c.valueQuantity !== undefined) {
             const q = c.valueQuantity as Record<string, unknown>;
-            if (q && typeof q.value !== "number" && q.value !== undefined) {
+            if (!q || Array.isArray(q)) {
+              issues.push({ severity: "error", path: `${compPath}.valueQuantity`, code: "invalid-structure", message: `Expected '${compPath}.valueQuantity' to be an object.` });
+            } else if (typeof q.value !== "number" || !Number.isFinite(q.value)) {
               issues.push({
                 severity: "error",
                 path: `${compPath}.valueQuantity.value`,

@@ -8,7 +8,7 @@ This document details what this library checks and what it deliberately does not
 
 ## What this library checks
 
-- **Base Structural Validation**: Required elements, value types, and cardinality constraints for 7 core FHIR R4 resource types (`Patient`, `Observation`, `Encounter`, `Condition`, `Coverage`, `Claim`, `ClaimResponse`).
+- **Base Structural Validation**: Required elements, value types, and selected cardinality constraints for 8 core FHIR R4 resource types (`Patient`, `Observation`, `Encounter`, `Condition`, `Coverage`, `Claim`, `ClaimResponse`, `Bundle`). Bundle entries are recursively validated when their resource type is supported.
 - **Reference Target-Type Validation**: Verifies that `Reference` elements point to valid, spec-compliant target resource types (e.g. ensuring `Observation.subject` references `Patient`, `Group`, `Device`, or `Location`, rather than an unrelated resource).
 - **Coding & CodeableConcept Structural Integrity**: Verifies that `Coding` objects have non-empty `code` strings and valid URI `system` identifiers, and that `CodeableConcept` structures contain valid `coding` arrays.
 - **Pluggable Profile Constraints**: Supports lightweight declarative constraint rules (extra required fields, cardinality minimums/maximums, and fixed pattern values) such as the illustrative `USCorePatientProfile` and `USCoreObservationVitalsProfile`.

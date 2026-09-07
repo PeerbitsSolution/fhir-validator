@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-09-07
+
+### Added
+- Structural validation for Bundles and nested Bundle resources.
+- Observation period, component quantity, UCUM code, finite-number, and choice-cardinality checks.
+- Transaction and batch request method/URL validation.
+
+### Changed
+- Require Node.js 20 or newer and update the test toolchain to remove known dependency vulnerabilities.
+
 ## [1.0.1] - 2026-08-19
 
 ### Fixed

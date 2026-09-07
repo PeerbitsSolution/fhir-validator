@@ -11,6 +11,7 @@ import { validateCondition } from "./base-definitions/condition.js";
 import { validateCoverage } from "./base-definitions/coverage.js";
 import { validateClaim } from "./base-definitions/claim.js";
 import { validateClaimResponse } from "./base-definitions/claim-response.js";
+import { validateBundle } from "./base-definitions/bundle.js";
 
 type ResourceValidator = (resource: Record<string, unknown>, path?: string) => ValidationIssue[];
 
@@ -22,6 +23,7 @@ const BASE_VALIDATORS: Record<string, ResourceValidator> = {
   Coverage: validateCoverage,
   Claim: validateClaim,
   ClaimResponse: validateClaimResponse,
+  Bundle: validateBundle,
 };
 
 /**
@@ -211,6 +213,15 @@ export function validate(resource: unknown, options?: ValidateOptions): Validati
   } else {
     // 1. Run base structural validation
     issues.push(...baseValidator(res, resourceType));
+    if (resourceType === "Bundle" && Array.isArray(res.entry)) {
+      res.entry.forEach((entry, index) => {
+        if (!entry || typeof entry !== "object" || Array.isArray(entry)) return;
+        const nested = (entry as Record<string, unknown>).resource;
+        if (!nested || typeof nested !== "object" || Array.isArray(nested)) return;
+        const nestedResult = validate(nested);
+        nestedResult.issues.forEach((issue) => issues.push({ ...issue, path: `Bundle.entry[${index}].resource.${issue.path}` }));
+      });
+    }
   }
 
   // 2. Run profile constraints if provided

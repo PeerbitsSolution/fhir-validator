@@ -1,5 +1,7 @@
 # @peerbits/fhir-validator
 
+Version 1.1 validates Bundle structure and recursively validates bundled resources, including transaction/batch request details. Observation checks now cover periods, components, finite quantities, UCUM codes, and FHIR choice-field cardinality.
+
 > Fast, lightweight structural, cardinality, and reference validation for FHIR R4 resources.
 
 [![CI](https://github.com/PeerbitsSolution/fhir-validator/actions/workflows/ci.yml/badge.svg)](https://github.com/PeerbitsSolution/fhir-validator/actions)
